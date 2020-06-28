@@ -2,10 +2,10 @@
 require_once './frontend/front_header.php';
 require_once './db.php';
 
-$event_id = $_GET['event_id'];
+$event_detail_id = $_GET['event_detail_id'];
 // Get all the event details
 
-$get_query = "SELECT * FROM events WHERE id = $event_id";
+$get_query = "SELECT * FROM events WHERE id = $event_detail_id";
 $from_db = mysqli_query($database_connection, $get_query);
 $assoc_event = mysqli_fetch_assoc($from_db);
 ?>

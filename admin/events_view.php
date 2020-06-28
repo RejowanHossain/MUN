@@ -123,39 +123,41 @@ $from_db = mysqli_query($database_connection, $select_data) or die(mysqli_error(
                     <tbody>
                         <?php
                         $serial = 1 ;
-                            foreach($from_db as $event):?>
+                            foreach($from_db as $eve):?>
                         <tr>
                             <!-- <td><?=$serial++?></td>
                             <td><?=$event['id']?></td> -->
-                            <td><?=ucwords($event['title'])?></td>
-                            <td><?=ucwords($event['country'])?></td>
-                            <td><?=ucwords($event['state'])?></td>
+                            <td><?=ucwords($eve['title'])?></td>
+                            <td><?=ucwords($eve['country'])?></td>
+                            <td><?=ucwords($eve['state'])?></td>
                             <td style="width:250px;">
-                                <?php echo substr(ucwords($event['description']), 0 , 80);
-                                if(strlen($event['description']) >= 80){
+                                <?php echo substr(ucwords($eve['description']), 0 , 80);
+                                if(strlen($eve['description']) >= 80){
                                     echo '...';
                                 }
                             ?>
                             </td>
                             <td>
-                                <img src="../uploads/events/<?=$event['image']?>" alt="<?=$event['image']?>"
+                                <img src="../uploads/events/<?=$eve['image']?>" alt="<?=$eve['image']?>"
                                     style="height:30px;width:30px; border-radius:50%;">
                             </td>
                             <td>
                                 <!-- Code for active/deactive button of service view page -->
-                                <?php if($event['status'] == 1):?>
-                                <a href="events_status_change.php?event_id=<?=$event['id']?>&btn=active"
+                                <?php if($eve['status'] == 1):?>
+                                <a href="events_status_change.php?event_id=<?=$eve['id']?>&btn=active"
                                     class="btn btn-dark btn-sm">Active</a>
                                 <?php endif;?>
-                                <?php if($event['status'] == 2):?>
-                                <a href="events_status_change.php?event_id=<?=$event['id']?>&btn=deactive"
+                                <?php if($eve['status'] == 2):?>
+                                <a href="events_status_change.php?event_id=<?=$eve['id']?>&btn=deactive"
                                     class="btn btn-warning btn-sm">Deactive</a>
                                 <?php endif;?>
                                 <!-- End -->
-                                <a href="events_edit.php?event_id=<?=$event['id']?>"
+                                <a href="events_edit.php?event_id=<?=$eve['id']?>"
                                     class="btn btn-primary btn-sm">Edit</a>
-                                <button class="btn btn-danger btn-sm delete_btn"
-                                    value="events_delete.php?event_id=<?=$event['id']?>">Delete</button>
+                                <a href="events_delete.php?event_delete_id=<?=$eve['id']?>"
+                                    class="btn btn-danger btn-sm delete_btn">Delete</a>
+                                <!-- <button class="btn btn-sm btn-danger delete_btn"
+                                    value="events_delete.php?event_delete_id=<?=$eve['id']?>">Delete</button> -->
 
                             </td>
                         <tr>

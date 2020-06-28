@@ -152,7 +152,7 @@
                             </p>
 
                         </div>
-                        <a href="event-detail.php?event_id=<?=$event_view['id']?>"
+                        <a href="event-detail.php?event_detail_id=<?=$event_view['id']?>"
                             class="btn btn-candidate-two bg-default">View
                             Detail</a>
                     </div>
