@@ -244,100 +244,39 @@ $assoc_event = mysqli_fetch_assoc($from_db);
 
         <div class="row mrg-0">
             <div class="col-md-12 col-sm-12">
-                <h3>Related Jobs</h3>
+                <h3>Related Events</h3>
             </div>
         </div>
         <!--Browse Job In Grid-->
+        <?php 
+			$select_related_events = "SELECT * FROM events LIMIT 3";
+			$query = mysqli_query($database_connection, $select_related_events);
+			// $related_assoc = mysqli_fetch_assoc($query);
+
+			foreach($query as $rel_event):
+			?>
         <div class="row mrg-0">
+            <a href="">
+                <div class="col-md-4 col-sm-6">
 
-            <div class="col-md-4 col-sm-6">
-                <div class="grid-view brows-job-list">
-                    <div class="brows-job-company-img">
-                        <img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
+                    <div class="grid-view brows-job-list">
+                        <div class="brows-job-company-img">
+                            <img src="uploads/events/<?=$rel_event['image']?>" class="img-responsive" alt="" />
+                        </div>
+                        <div class="brows-job-position">
+                            <h3><a href="job-detail-2.html"><?=$rel_event['title']?></a></h3>
+                            <p><span><?=$rel_event['country']?></span></p>
+                            <p><span><?=$rel_event['state']?></span></p>
+                            <p><span><?=$rel_event['description']?></span></p>
+                        </div>
                     </div>
-                    <div class="brows-job-position">
-                        <h3><a href="job-detail-2.html">Web Developer</a></h3>
-                        <p><span>Google</span></p>
-                    </div>
-                    <div class="job-position">
-                        <span class="job-num">5 Position</span>
-                    </div>
-                    <div class="brows-job-type">
-                        <span class="full-time">Full Time</span>
-                    </div>
-                    <ul class="grid-view-caption">
-                        <li>
-                            <div class="brows-job-location">
-                                <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                            </div>
-                        </li>
-                        <li>
-                            <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                        </li>
-                    </ul>
-                    <span class="tg-themetag tg-featuretag">Premium</span>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="grid-view brows-job-list">
-                    <div class="brows-job-company-img">
-                        <img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-                    </div>
-                    <div class="brows-job-position">
-                        <h3><a href="job-detail-2.html">Web Developer</a></h3>
-                        <p><span>Google</span></p>
-                    </div>
-                    <div class="job-position">
-                        <span class="job-num">5 Position</span>
-                    </div>
-                    <div class="brows-job-type">
-                        <span class="part-time">Part Time</span>
-                    </div>
-                    <ul class="grid-view-caption">
-                        <li>
-                            <div class="brows-job-location">
-                                <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                            </div>
-                        </li>
-                        <li>
-                            <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="grid-view brows-job-list">
-                    <div class="brows-job-company-img">
-                        <img src="http://via.placeholder.com/150x150" class="img-responsive" alt="" />
-                    </div>
-                    <div class="brows-job-position">
-                        <h3><a href="job-detail-2.html">Web Developer</a></h3>
-                        <p><span>Google</span></p>
-                    </div>
-                    <div class="job-position">
-                        <span class="job-num">5 Position</span>
-                    </div>
-                    <div class="brows-job-type">
-                        <span class="freelanc">Freelancer</span>
-                    </div>
-                    <ul class="grid-view-caption">
-                        <li>
-                            <div class="brows-job-location">
-                                <p><i class="fa fa-map-marker"></i>QBL Park, C40</p>
-                            </div>
-                        </li>
-                        <li>
-                            <p><span class="brows-job-sallery"><i class="fa fa-money"></i>$110 - 200</span></p>
-                        </li>
-                    </ul>
-                    <span class="tg-themetag tg-featuretag">Premium</span>
-                </div>
-            </div>
-
+            </a>
         </div>
-        <!--/.Browse Job In Grid-->
+        <?php endforeach;?>
+
+
+    </div>
+    <!--/.Browse Job In Grid-->
 
     </div>
 </section>
