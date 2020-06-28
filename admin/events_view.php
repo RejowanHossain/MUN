@@ -21,7 +21,12 @@ $a = ceil($count/6);
 $limit = 6;
 
 // fetching data from database to view on the table
-$select_data = "SELECT * FROM events ORDER BY id DESC LIMIT $page1 , $limit ";
+if(isset($_POST['search'])){
+    $searchKey = $_POST['search'];
+    $select_data = "SELECT * FROM events ORDER BY id DESC LIMIT $page1 , $limit WHERE country LIKE %$searchKey%";
+}else{
+    $select_data = "SELECT * FROM events ORDER BY id DESC LIMIT $page1 , $limit ";
+}
 $from_db = mysqli_query($database_connection, $select_data) or die(mysqli_error($database_connection));
 
 
@@ -98,8 +103,10 @@ $from_db = mysqli_query($database_connection, $select_data) or die(mysqli_error(
                 <br>
             </div><!-- col-3 -->
             <div class="col-sm-6 col-xl-12">
-                <!-- <input type="text" id="myInput" class="form-control col-md-3 mb-2" 
-                    style="border-radius:6px;float:right;" placeholder="search by country" onkeyup="searchFun()">-->
+                <!-- <form action="" method="post">
+                    <input type="text" name="search" class="form-control col-md-3 mb-2"
+                        style="border-radius:6px;float:right;" placeholder="search by country">
+                </form> -->
                 <table class="table" id="event_table">
                     <thead>
                         <tr>

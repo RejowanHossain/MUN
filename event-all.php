@@ -36,28 +36,21 @@ $limit = 9;
             <!-- Company Searrch Filter Start -->
             <div class="row extra-mrg">
                 <div class="wrap-search-filter">
-                    <form>
+                    <!-- Search Functionality -->
+
+                    <form action="event-search.php" method="post">
                         <div class="col-md-4 col-sm-4">
-                            <input type="text" class="form-control" placeholder="Keyword: Name, Tag">
+                            <input type="text" class="form-control" placeholder="Title" name="search_title">
                         </div>
                         <div class="col-md-3 col-sm-3">
-                            <input type="text" class="form-control" placeholder="Location: City, State, Zip">
+                            <input type="text" class="form-control" placeholder="Country" name="search_country">
                         </div>
                         <div class="col-md-3 col-sm-3">
-                            <select class="form-control" id="j-category">
-                                <option value="">&nbsp;</option>
-                                <option value="1">Information Technology</option>
-                                <option value="2">Mechanical</option>
-                                <option value="3">Hardware</option>
-                                <option value="4">Hospitality & Tourism</option>
-                                <option value="5">Education & Training</option>
-                                <option value="6">Government & Public</option>
-                                <option value="7">Architecture</option>
-                            </select>
+                            <input type="text" class="form-control" placeholder="State" name="search_state">
 
                         </div>
                         <div class="col-md-2 col-sm-2">
-                            <a href="" type="submit" class="btn btn-primary full-width">Filter</a>
+                            <button name="search" type="submit" class="btn btn-primary full-width">Filter</button>
                         </div>
                     </form>
                 </div>
@@ -67,8 +60,8 @@ $limit = 9;
             <!--Browse Job In Grid-->
             <div class="row extra-mrg">
                 <?php 
-					$select_events = "SELECT * FROM events LIMIT $page1, $limit";
-					$events_from_db = mysqli_query($database_connection, $select_events);
+                    $select_events = "SELECT * FROM events LIMIT $page1, $limit";
+                    $events_from_db = mysqli_query($database_connection, $select_events);
 					while($row = mysqli_fetch_assoc($events_from_db)):
 				?>
                 <div class="col-md-4 col-sm-6">
@@ -104,8 +97,9 @@ $limit = 9;
                     <?php 
                     	for($b = 1; $b <= $a; $b++){
 					?>
-                    <li class="active"><a href="event-all.php?page=<?= $b; ?>"><?=$b. " "?></a></li>
+                    <li class="" id="act"><a href="event-all.php?page=<?= $b; ?>"><?=$b. " "?></a></li>
                     <?php }?>
+
                     <!-- <li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
                     <li><a href="#"><i class="ti-arrow-right"></i></a></li> -->
                 </ul>
@@ -136,5 +130,15 @@ $limit = 9;
     <!-- ============================ Call To Action End ================================== -->
 
     <?php
- 		require_once './frontend/front_footer.php'
+ 		require_once './frontend/front_footer.php';
 	?>
+    <script>
+    let buttons = document.getElementById('act');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            this.classlist.add('active');
+        })
+    });
+    </script>

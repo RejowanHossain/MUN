@@ -3,18 +3,18 @@
  require_once './db.php';
 
 // pagination page fetching by GET method and calculations
-$page = $_GET['page'];
-if($page == "" || $page == "1"){
-    $page1 = 0;
-}else{
-    $page1 = ($page *9)-9; 
-}
+// $page = $_GET['page'];
+// if($page == "" || $page == "1"){
+//     $page1 = 0;
+// }else{
+//     $page1 = ($page *9)-9; 
+// }
 
-//Query for pagination 
-$pagination_query = mysqli_query($database_connection, "SELECT * FROM events") ;
-$count = mysqli_num_rows($pagination_query);
-$a = ceil($count/9);
-$limit = 9;
+// //Query for pagination 
+// $pagination_query = mysqli_query($database_connection, "SELECT * FROM events") ;
+// $count = mysqli_num_rows($pagination_query);
+// $a = ceil($count/9);
+// $limit = 9;
 
 ?>
 <div class="Loader"></div>
@@ -171,7 +171,7 @@ $limit = 9;
     <!-- Title Header Start -->
     <section class="inner-header-title" style="background-image:url(http://via.placeholder.com/1920x850);">
         <div class="container">
-            <h1>Browse Jobs</h1>
+            <h1>Searched Events</h1>
         </div>
     </section>
     <div class="clearfix"></div>
@@ -183,7 +183,7 @@ $limit = 9;
             <!-- Company Searrch Filter Start -->
             <div class="row extra-mrg">
                 <div class="wrap-search-filter">
-                    <form>
+                    <!-- <form>
                         <div class="col-md-4 col-sm-4">
                             <input type="text" class="form-control" placeholder="Keyword: Name, Tag">
                         </div>
@@ -206,7 +206,7 @@ $limit = 9;
                         <div class="col-md-2 col-sm-2">
                             <a href="eventgrid.php?page=" type="submit" class="btn btn-primary full-width">Filter</a>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
             <!-- Company Searrch Filter End -->
@@ -214,33 +214,44 @@ $limit = 9;
             <!--Browse Job In Grid-->
             <div class="row extra-mrg">
                 <?php 
-					$select_events = "SELECT * FROM events LIMIT $page1, $limit";
-					$events_from_db = mysqli_query($database_connection, $select_events);
-					while($row = mysqli_fetch_assoc($events_from_db)):
-				?>
+                
+                    if(isset($_POST['search'])){
+                    $search_title = htmlentities(ucwords($_POST['search_title']));
+                    $search_country = htmlentities(ucwords($_POST['search_country']));
+                    $search_state = htmlentities(ucwords($_POST['search_state']));
+                    }
+
+                    $search_query = "SELECT * FROM events WHERE title LIKE '%$search_title%' OR country LIKE '%$search_country%' OR state LIKE '%$search_state%'";
+                    $query = mysqli_query($database_connection, $search_query);
+                    
+                    while($row = mysqli_fetch_assoc($query)):        
+                    ?>
                 <div class="col-md-4 col-sm-6">
                     <div class="top-candidate-wrap style-2">
                         <div class="top-candidate-box">
                             <div class="tp-candidate-inner-box">
                                 <div class="top-candidate-box-thumb">
-                                    <img src="/mun/uploads/events/<?=$row['image']?>" class="img-responsive img-circle"
+                                    <img src="uploads/events/<?= $row['image']?>" class="img-responsive img-circle"
                                         alt="" />
                                 </div>
                                 <div class="top-candidate-box-detail">
-                                    <h4><?=$row['title']?></h4>
-                                    <span class="location"><?=$row['country']?></span>
+                                    <h4><?= $row['title']?></h4>
+                                    <span class="location"></span>
                                 </div>
                                 <div class="rattings">
-                                    <span class="location"><?=$row['state']?></span>
+                                    <span class="location"><?= $row['country']?></span>
                                 </div>
                             </div>
                             <div class="top-candidate-box-extra">
-                                <p><?=$row['description']?></p>
+                                <p><?= $row['state']?></p>
+                            </div>
+                            <div class="top-candidate-box-extra">
+                                <p><?= $row['description']?></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php endwhile ;?>
+                <?php endwhile;?>
             </div>
             <!--/.Browse Job In Grid-->
 
@@ -248,11 +259,11 @@ $limit = 9;
                 <ul class="pagination">
                     <!-- <li><a href="#"><i class="ti-arrow-left"></i></a></li> -->
                     <!-- pagination links -->
-                    <?php 
+                    <!-- <?php 
                     	for($b = 1; $b <= $a; $b++){
 					?>
                     <li class="active"><a href="eventgrid.php?page=<?= $b; ?>"><?=$b. " "?></a></li>
-                    <?php }?>
+                    <?php }?> -->
                     <!-- <li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
                     <li><a href="#"><i class="ti-arrow-right"></i></a></li> -->
                 </ul>
