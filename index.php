@@ -13,19 +13,20 @@
                     <div class="hero-search-content">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-12 small-padd">
-                                <div class="form-group">
-                                    <div class="input-with-icon">
-                                        <input type="text" name="title" class="form-control b-r"
-                                            placeholder="Search Title">
-                                        <i class="ti-search"></i>
+                                <form action="event-search.php" method="post">
+                                    <div class="form-group">
+                                        <div class="input-with-icon">
+                                            <input type="text" name="search_title" class="form-control b-r"
+                                                placeholder="Search Title">
+                                            <i class="ti-search"></i>
+                                        </div>
                                     </div>
-                                </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
                                 <div class="form-group">
                                     <div class="input-with-icon">
-                                        <select id="country" id="country" class="form-control">
+                                        <select id="country" id="country" name="search_country" class="form-control">
                                             <option>Country</option>
                                             <?php 
                                                         $select_country = "SELECT * FROM countries";
@@ -44,7 +45,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-12 small-padd">
                                 <div class="form-group">
                                     <div class="input-with-icon">
-                                        <select id="state" name="state" class="form-control">
+                                        <select id="state" name="search_state" class="form-control">
                                             <option>Choose State</option>
                                         </select>
                                         <i class="ti-layers"></i>
@@ -55,11 +56,12 @@
                             <div class="col-lg-2 col-md-2 col-sm-12 small-padd">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <a href="./event-all.php?page=" class="btn btn-primary search-btn">Search
-                                        </a>
+                                        <button name="search" type="submit" class="btn btn-primary search-btn">Search
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
